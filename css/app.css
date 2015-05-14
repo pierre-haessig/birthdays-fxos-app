@@ -1,0 +1,38 @@
+html, body {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+body {
+  font-size: 1rem;
+  background: #fff;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+}
+
+p {
+  font-size: inherit;
+}
+
+/*Birthday lists*/
+
+h2.month {
+  font-size: 1.1rem;
+  font-weight: 300;
+
+}
+
+ul.bday_list {
+  padding-left: 0px;
+}
+
+ul.bday_list li {
+  list-style-type: none;
+}
+
+.day {
+/*  color: white;*/
+/*  background-color: #000077;*/
+}

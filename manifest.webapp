@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "name": "Birthdays",
+  "description": "Displays the birthday of the contacts",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/icon-16.png",
+    "48": "/img/icons/icon-48.png",
+    "60": "/img/icons/icon-60.png",
+    "128": "/img/icons/icon-128.png"
+  },
+  "developer": {
+    "name": "Pierre Haessig",
+    "url": "http://pierreh.eu"
+  },
+  "type": "privileged",
+  "permissions": {
+    "contacts": {
+      "description": "Required for reading birthdays",
+      "access": "readonly"
+      }
+  },
+  "locales": {
+    "fr": {
+      "name": "Anniversaires",
+      "description": "Affiche la date d'anniversaire des contacts"
+    }
+  },
+  "default_locale": "en"
+}
