@@ -16,6 +16,11 @@ function bdaySort(contact1, contact2) {
   return doy1 - doy2
 }
 
+function bdayAge(contact) {
+  var birthYear = contact.bday.getFullYear();
+  return (new Date).getFullYear() - birthYear;
+}
+
 function processContacts(bdayContacts) {
   bdayContacts.sort(bdaySort)
   console.log(bdayContacts)
@@ -25,7 +30,9 @@ function processContacts(bdayContacts) {
     var bday_list = document.getElementById('bday_list_m' + contact.bday.getMonth())
     var li = document.createElement('li');
     li.innerHTML = "<p><strong class='day'>" + contact.bday.getDate() + "</strong>" + " " +
-                   "<span class='name'>" + contact.name + "</span></p>";
+                   "<span class='name'>" + contact.name + "</span>" + " " +
+                   "<em class='age'>(" + bdayAge(contact) + ")</em>" +
+                   "</p>";
     bday_list.appendChild(li);
   });
 
