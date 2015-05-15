@@ -1,38 +1,30 @@
 html, body {
   margin: 0;
-  padding: 0.5rem;
-}
-
-body {
-  font-size: 1rem;
-  background: #fff;
-}
-
-h1 {
-  margin: 0 0 1rem 0;
-}
-
-p {
-  font-size: inherit;
+  padding: 0;
+  background-color: white;
+  font-size: 10px;
 }
 
 /*Birthday lists*/
 
-h2.month {
-  font-size: 1.1rem;
-  font-weight: 300;
-
+[data-type="list"] li p {
+  -moz-margin-start: 1.5rem;
+  /*adjust the margin of list elements to be aligned with the month headers*/
 }
 
-ul.bday_list {
-  padding-left: 0px;
-}
-
-ul.bday_list li {
-  list-style-type: none;
-}
-
+/*Display the day of the month a nice color square */
 .day {
-/*  color: white;*/
-/*  background-color: #000077;*/
+  display: inline-block;
+  width: 1.8em;
+  height: 1.8em;
+  line-height: 1.8em;
+  border-radius: 0.5em;
+  
+  background-color: #ec6900; /*orange*/
+  color: white;
+  
+  text-align: center;
+  vertical-align: middle;
+  
+  margin-right: 0.3em;
 }

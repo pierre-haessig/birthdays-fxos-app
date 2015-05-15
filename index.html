@@ -5,7 +5,10 @@
         <title>Birthdays app</title>
         <meta name="description" content="Display the birthday of the contacts">
         
+        <meta name="theme-color" content="#ff7d14">
         <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/style/headers.css">
+        <link rel="stylesheet" href="css/style/lists.css">
         <link rel="stylesheet" href="css/app.css">
 
         <script type="text/javascript" src="js/app.js" defer></script>
@@ -13,45 +16,51 @@
         <link rel="prefetch" type="application/l10n" href="data/locales.ini" />
         <script type="text/javascript" src="js/libs/l10n.js" defer></script>
     </head>
-    <body>
-        <section>
+    
+    <body role="application">
+        <section role="region">
+            <header>
             <h1 data-l10n-id="app_title">Birthdays</h1>
+            </header>
+        </section>
             
-            <h2 class="month" data-l10n-id="month_jan">Jan</h2>
+        <section data-type="list">
+
+            <header class="month" data-l10n-id="month_jan">Jan</header>
             <ul id="bday_list_m0" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_feb">Feb</h2>
+            <header class="month" data-l10n-id="month_feb">Feb</header>
             <ul id="bday_list_m1" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_mar">Mar</h2>
+            <header class="month" data-l10n-id="month_mar">Mar</header>
             <ul id="bday_list_m2" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_apr">Apr</h2>
+            <header class="month" data-l10n-id="month_apr">Apr</header>
             <ul id="bday_list_m3" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_may">May</h2>
+            <header class="month" data-l10n-id="month_may">May</header>
             <ul id="bday_list_m4" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_jun">Jun</h2>
+            <header class="month" data-l10n-id="month_jun">Jun</header>
             <ul id="bday_list_m5" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_jul">Jul</h2>
+            <header class="month" data-l10n-id="month_jul">Jul</header>
             <ul id="bday_list_m6" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_aug">Aug</h2>
+            <header class="month" data-l10n-id="month_aug">Aug</header>
             <ul id="bday_list_m7" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_sep">Sep</h2>
+            <header class="month" data-l10n-id="month_sep">Sep</header>
             <ul id="bday_list_m8" class="bday_list"></ul>
             
-            <h class="month" data-l10n-id="month_oct">Oct</h2>
+            <header class="month" data-l10n-id="month_oct">Oct</header>
             <ul id="bday_list_m9" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_nov">Nov</h2>
+            <header class="month" data-l10n-id="month_nov">Nov</header>
             <ul id="bday_list_m10" class="bday_list"></ul>
             
-            <h2 class="month" data-l10n-id="month_dec">Dec</h2>
+            <header class="month" data-l10n-id="month_dec">Dec</header>
             <ul id="bday_list_m11" class="bday_list"></ul>
-        </section>
+        </section><!-- data-type="list" -->
     </body>
 </html>
