@@ -28,3 +28,17 @@ html, body {
   
   margin-right: 0.3em;
 }
+
+/* Current month */
+ul.current-month .day {
+  background-color: #1b7acb; /*blue*/
+}
+
+header.current-month {
+  color: #1b7acb;
+}
+
+/* Current day */
+ul.current-month .current-day {
+  background-color: #f00479; /*pink*/
+}

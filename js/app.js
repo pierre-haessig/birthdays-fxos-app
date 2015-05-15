@@ -35,9 +35,29 @@ function processContacts(bdayContacts) {
                    "</p>";
     bday_list.appendChild(li);
   });
-
 }
 
+var shortMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+function highlightCurrentDate() {
+  /*Current month*/
+  var today = new Date()
+  var bday_list = document.getElementById('bday_list_m' + today.getMonth());
+  bday_list.classList.add('current-month');
+  var header = document.getElementById('head_m' + today.getMonth());
+  header.classList.add('current-month');
+  
+  /*Current Day*/
+  var days = bday_list.getElementsByClassName('day');
+  
+  var i;
+  for (i = 0; i < days.length; i++) {
+    /*check the day*/
+    if (days[i].textContent == today.getDate()) {
+      days[i].classList.add('current-day');
+    }
+  }
+}
 
 function start() {
   /*Main function*/
@@ -63,6 +83,8 @@ function start() {
     } else {
       console.log("Browsing contacts done");
       processContacts(bdayContacts);
+        
+      highlightCurrentDate();
     }
   };
   
@@ -84,7 +106,7 @@ function start() {
       ];
   processContacts(bdayContacts);
   };
-
+  
 }
 
 
