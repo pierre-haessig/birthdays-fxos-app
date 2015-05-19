@@ -29,6 +29,7 @@ function processContacts(bdayContacts) {
   bdayContacts.forEach(function (contact, index) {
     var bday_list = document.getElementById('bday_list_m' + contact.bday.getMonth())
     var li = document.createElement('li');
+    li.dataset.cid = contact.id;
     li.innerHTML = "<p><strong class='day'>" + contact.bday.getDate() + "</strong>" + " " +
                    "<span class='name'>" + contact.name + "</span>" + " " +
                    "<em class='age'>(" + bdayAge(contact) + ")</em>" +
@@ -59,8 +60,52 @@ function highlightCurrentDate() {
   }
 }
 
+function contactClickHandler(evt) {
+  var target = evt.target;
+
+  // try to reach the <li> element that contains the contact
+  while (target !== null && target.tagName != 'LI') {
+    target = target.parentElement;
+  }
+  
+  // get the contact ID
+  var cid;
+  if (target && target.dataset && target.dataset.cid) {
+    cid = target.dataset.cid;
+    console.log(cid);
+    openContact(cid)
+  }
+
+  evt.preventDefault();
+}
+
+function openContact(cid) {
+  var activity = new MozActivity({
+  name: 'open',
+  data: {
+    type: 'webcontacts/contact',
+    params: {
+      id: cid
+    }
+  }
+  });
+  
+  activity.onsuccess = function() {
+    console.log(this.result);
+  };
+  
+  activity.onerror = function() {
+    console.log(this.error);
+  };
+}
+
+
 function start() {
   /*Main function*/
+  
+  // attach click handler
+  var bday_lists = document.getElementById('bday_lists');
+  bday_lists.onclick = contactClickHandler;
   
   // Browse the contacts
   var allContacts = navigator.mozContacts.getAll();
@@ -76,7 +121,8 @@ function start() {
         //console.log(contact)
         bdayContacts.push({
           'name': contact.name[0],
-          'bday': contact.bday
+          'bday': contact.bday,
+          'id': contact.id
         });
       }
       cursor.continue();
