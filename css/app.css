@@ -10,6 +10,13 @@ html, body {
 [data-type="list"] li p {
   -moz-margin-start: 1.5rem;
   /*adjust the margin of list elements to be aligned with the month headers*/
+  pointer-events: none;
+  /*click events should be captured only by the parent <li> element.
+  Helps the openContact js function */
+}
+
+[data-type="list"] li:active {
+  background-color: rgba(0, 213, 255, 0.3);
 }
 
 /*Display the day of the month a nice color square */

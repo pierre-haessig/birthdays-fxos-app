@@ -62,11 +62,6 @@ function highlightCurrentDate() {
 
 function contactClickHandler(evt) {
   var target = evt.target;
-
-  // try to reach the <li> element that contains the contact
-  while (target !== null && target.tagName != 'LI') {
-    target = target.parentElement;
-  }
   
   // get the contact ID
   var cid;
@@ -80,6 +75,8 @@ function contactClickHandler(evt) {
 }
 
 function openContact(cid) {
+  /**/
+  console.log('Opening contact ' + cid + '...')
   var activity = new MozActivity({
   name: 'open',
   data: {
@@ -90,12 +87,9 @@ function openContact(cid) {
   }
   });
   
-  activity.onsuccess = function() {
-    console.log(this.result);
-  };
-  
   activity.onerror = function() {
-    console.log(this.error);
+    /* Coming back from the Contact view */
+    console.log('...back from Contact view');
   };
 }
 
