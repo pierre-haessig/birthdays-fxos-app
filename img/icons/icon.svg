@@ -49,13 +49,13 @@
      inkscape:window-height="741"
      id="namedview12"
      showgrid="false"
-     inkscape:zoom="3.6875001"
-     inkscape:cx="196.70349"
-     inkscape:cy="64.175241"
+     inkscape:zoom="0.46093751"
+     inkscape:cx="-292.38235"
+     inkscape:cy="78.687569"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g3829"
+     inkscape:current-layer="g3899"
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-global="true"
@@ -157,7 +157,7 @@
        height="49.665264"
        width="98.085785"
        id="rect3895"
-       style="color:#000000;fill:#1f24ae;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.16401719999999997;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:1" />
+       style="color:#000000;fill:#b75300;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999994000000003;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:1" />
     <path
        clip-path="none"
        transform="matrix(0.88015139,0,0,0.59251474,7.6703108,30.079057)"
@@ -182,18 +182,18 @@
      id="g3829">
     <g
        id="g4030"
-       style="color:#000000;fill:#2a2fa3;fill-opacity:1;fill-rule:evenodd;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-width:0.25491944000000000">
+       style="color:#000000;fill:#ae0005;fill-opacity:1;fill-rule:evenodd;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-width:0.25491944000000000">
       <path
          sodipodi:nodetypes="ccccc"
          inkscape:connector-curvature="0"
          id="rect3794"
          d="m 160,64 16,0 0,32 -16,0 z"
-         style="color:#000000;fill:#2a2fa3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.25491944000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#ae0005;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.25491944000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <path
          clip-path="none"
          transform="matrix(0.14357252,0,0,0.09665251,158.81136,86.721359)"
          sodipodi:type="arc"
-         style="color:#000000;fill:#2a2fa3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.16401728999999987;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#ae0005;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.16401728999999987;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="path3827"
          sodipodi:cx="64"
          sodipodi:cy="96"
