@@ -21,6 +21,14 @@
       }
   },
   "locales": {
+    "de": {
+      "name": "Geburtstage",
+      "description": "Zeigt den Geburtstag der Kontakte"
+    },
+    "es": {
+      "name": "Cumpleaños",
+      "description": "Muestra el cumpleaños de los contactos"
+    },
     "fr": {
       "name": "Anniversaires",
       "description": "Affiche la date d'anniversaire des contacts"
