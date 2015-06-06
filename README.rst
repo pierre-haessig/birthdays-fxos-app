@@ -11,7 +11,21 @@ These styling files are distributed by the Mozilla Foundation under an Apache 2.
 Screenshot
 ----------
 
-*coming soon*
+All contacts which have a birthday appears in a month/day list:
+
+.. image:: screenshots/screen_EN_1.png
+
+
+Current month is highlighted:
+
+.. image:: screenshots/screen_EN_2.png
+
+Contact can be opened with a click, to whish them a happy birthday
+with a call or a text message:
+
+.. image:: screenshots/screen_EN_3.png
+
+
 
 Background information
 ----------------------
