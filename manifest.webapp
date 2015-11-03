@@ -1,38 +1,57 @@
 {
-  "version": "1.0",
-  "name": "Birthdays",
-  "description": "Displays the birthday of the contacts",
-  "launch_path": "/index.html",
-  "icons": {
-    "16": "/img/icons/icon-16.png",
-    "48": "/img/icons/icon-48.png",
-    "60": "/img/icons/icon-60.png",
-    "128": "/img/icons/icon-128.png"
-  },
-  "developer": {
-    "name": "Pierre Haessig",
-    "url": "http://pierreh.eu"
-  },
-  "type": "privileged",
-  "permissions": {
-    "contacts": {
-      "description": "Required for reading birthdays",
-      "access": "readonly"
-      }
-  },
-  "locales": {
-    "de": {
-      "name": "Geburtstage",
-      "description": "Zeigt den Geburtstag der Kontakte"
-    },
-    "es": {
-      "name": "Cumpleaños",
-      "description": "Muestra el cumpleaños de los contactos"
-    },
-    "fr": {
-      "name": "Anniversaires",
-      "description": "Affiche la date d'anniversaire des contacts"
-    }
-  },
-  "default_locale": "en"
+	"version": "1.0",
+	"name": "Birthdays",
+	"description": "Displays the birthday of the contacts",
+	"launch_path": "/index.html",
+	"icons": {
+		"16": "/img/icons/icon-16.png",
+		"48": "/img/icons/icon-48.png",
+		"60": "/img/icons/icon-60.png",
+		"128": "/img/icons/icon-128.png"
+	},
+	"developer": {
+		"name": "Pierre Haessig",
+		"url": "http://pierreh.eu"
+	},
+	"type": "privileged",
+	"permissions": {
+		"contacts": {
+			"description": "Required for reading birthdays",
+			"access": "readonly"
+		}
+	},
+	"locales": {
+		"de": {
+			"name": "Geburtstage",
+			"description": "Zeigt den Geburtstag der Kontakte"
+		},
+		"es": {
+			"name": "Cumpleaños",
+			"description": "Muestra el cumpleaños de los contactos"
+		},
+		"eo": {
+			"name": "Naskiĝdatoj",
+			"description": "Montri la naskiĝdatojn de viaj kontaktoj",
+			"permissions": {
+				"contacts": {
+					"description": "Necesita por legi naskiĝdatojn",
+				}
+
+			}
+		},
+		"fr": {
+			"name": "Anniversaires",
+			"description": "Affiche la date d'anniversaire des contacts"
+		},
+		"it": {
+			"name": "Compleanni",
+			"description": "Mostra i compleanni dei contatti",
+			"permissions": {
+				"contacts": {
+					"description": "Necessario per leggere i compleanni",
+				}
+    			}
+		}
+	},
+	"default_locale": "en"
 }
