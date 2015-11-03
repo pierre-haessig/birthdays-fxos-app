@@ -17,6 +17,10 @@ function bdaySort(contact1, contact2) {
 }
 
 function bdayAge(contact) {
+  if (!(contact.bday instanceof Date)) {
+    contact.bday = new Date(contact.bday);
+  }
+
   var birthYear = contact.bday.getFullYear();
   return (new Date).getFullYear() - birthYear;
 }
@@ -45,6 +49,9 @@ function processContacts(bdayContacts) {
     ) {
       notifyContactBirthday(contact)
     }
+
+    /* Alarms */
+    addAlarm(contact);
   });
 }
 
@@ -52,6 +59,7 @@ function removeContacts() {
   var contacts = document.querySelectorAll('.bday_list li');
 
   for (var i = 0; i < contacts.length; i++) {
+    navigator.mozAlarms.remove(contacts[i].dataset.aid);
     contacts[i].parentElement.removeChild(contacts[i]);
   }
 }
@@ -98,10 +106,33 @@ function notifyContactBirthday(contact) {
   };
 }
 
-function reloadClickHandler(evt) {
-  removeContacts();
+function addAlarm(contact) {
+  var alarmDate = new Date;
+  alarmDate.setMonth(contact.bday.getMonth());
+  alarmDate.setDate(contact.bday.getDate());
+  alarmDate.setHours(0);
+  alarmDate.setMinutes(0);
+  alarmDate.setSeconds(0);
+  alarmDate.setMilliseconds(0);
+
+  var alarmRequest = navigator.mozAlarms.add(alarmDate, "ignoreTimezone", contact);
+
+  alarmRequest.onsuccess = function () {
+    var day = document.querySelector('.bday_list li[data-cid="' + contact.id + '"]');
+    if (!!day) {
+      day.dataset.aid = this.result;
+    }
+  };
+}
+
+function reloadAll() {
   removeHighlight();
+  removeContacts();
   fetchContacts();
+}
+
+function reloadClickHandler(evt) {
+  reloadAll();
 
   evt.preventDefault();
 }
@@ -210,3 +241,11 @@ window.addEventListener('DOMContentLoaded', function() {
   // So we'll tell it to let us know once it's ready.
   navigator.mozL10n.once(start);
 });
+
+if (navigator.mozSetMessageHandler) {
+  navigator.mozSetMessageHandler("alarm", function (alarm) {
+    if (alarm.data.id) {
+      notifyContactBirthday(alarm.data);
+    }
+  });
+}
