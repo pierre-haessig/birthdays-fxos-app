@@ -18,7 +18,9 @@
     "contacts": {
       "description": "Required for reading birthdays",
       "access": "readonly"
-      }
+    },
+    "desktop-notification": {},
+    "audio-channel-notification": {}
   },
   "locales": {
     "de": {

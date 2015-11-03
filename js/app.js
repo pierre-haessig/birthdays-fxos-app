@@ -25,8 +25,10 @@ function processContacts(bdayContacts) {
   bdayContacts.sort(bdaySort)
   console.log(bdayContacts)
 
-  /* Display */
+  var today = new Date();
+
   bdayContacts.forEach(function (contact, index) {
+    /* Display */
     var bday_list = document.getElementById('bday_list_m' + contact.bday.getMonth())
     var li = document.createElement('li');
     li.dataset.cid = contact.id;
@@ -35,6 +37,14 @@ function processContacts(bdayContacts) {
                    "<em class='age'>(" + bdayAge(contact) + ")</em>" +
                    "</p>";
     bday_list.appendChild(li);
+
+    /* Notifications */
+    if (
+      contact.bday.getMonth() === today.getMonth()
+      && contact.bday.getDate() === today.getDate()
+    ) {
+      notifyContactBirthday(contact)
+    }
   });
 }
 
@@ -74,6 +84,18 @@ function removeHighlight() {
   for (var i = 0; i < current_months.length; i++) {
     current_months[i].classList.remove('current-month');
   }
+}
+
+function notifyContactBirthday(contact) {
+  var notification = new Notification(navigator.mozL10n.get('app_title'), {
+    body: contact.name + ' (' + bdayAge(contact) + ')',
+    icon: '/img/icons/icon-128.png'
+  });
+
+  notification.onclick = function () {
+    openContact(contact.id);
+    notification.close();
+  };
 }
 
 function reloadClickHandler(evt) {
