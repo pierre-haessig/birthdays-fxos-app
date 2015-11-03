@@ -76,7 +76,7 @@ function removeHighlight() {
   }
 }
 
-function headerClickHandler(evt) {
+function reloadClickHandler(evt) {
   removeContacts();
   removeHighlight();
   fetchContacts();
@@ -169,8 +169,8 @@ function start() {
   /*Main function*/
 
   // attach click handler
-  var header = document.querySelector('section[role="region"]');
-  header.ondblclick = headerClickHandler;
+  var reload_button = document.getElementById('button-reload');
+  reload_button.onclick = reloadClickHandler;
 
   // attach click handler
   var bday_lists = document.getElementById('bday_lists');
