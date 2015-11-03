@@ -20,7 +20,10 @@
       "access": "readonly"
     },
     "desktop-notification": {},
-    "audio-channel-notification": {}
+    "audio-channel-notification": {},
+    "alarms": {
+      "description": "Required to schedule alarms"
+    }
   },
   "locales": {
     "de": {
