@@ -1,5 +1,5 @@
 {
-	"version": "1.0",
+	"version": "1.1",
 	"name": "Birthdays",
 	"description": "Displays the birthday of the contacts",
 	"launch_path": "/index.html",
@@ -34,23 +34,27 @@
 			"description": "Montri la naskiĝdatojn de viaj kontaktoj",
 			"permissions": {
 				"contacts": {
-					"description": "Necesita por legi naskiĝdatojn",
+					"description": "Necesita por legi naskiĝdatojn"
 				}
-
 			}
 		},
 		"fr": {
 			"name": "Anniversaires",
-			"description": "Affiche la date d'anniversaire des contacts"
+			"description": "Affiche la date d'anniversaire des contacts",
+			"permissions": {
+				"contacts": {
+					"description": "Nécessaire pour lire les anniversaires"
+				}
+    		}
 		},
 		"it": {
 			"name": "Compleanni",
 			"description": "Mostra i compleanni dei contatti",
 			"permissions": {
 				"contacts": {
-					"description": "Necessario per leggere i compleanni",
+					"description": "Necessario per leggere i compleanni"
 				}
-    			}
+    		}
 		}
 	},
 	"default_locale": "en"
