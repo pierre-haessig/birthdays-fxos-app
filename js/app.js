@@ -24,7 +24,7 @@ function bdayAge(contact) {
 function processContacts(bdayContacts) {
   bdayContacts.sort(bdaySort)
   console.log(bdayContacts)
-  
+
   /* Display */
   bdayContacts.forEach(function (contact, index) {
     var bday_list = document.getElementById('bday_list_m' + contact.bday.getMonth())
@@ -38,6 +38,14 @@ function processContacts(bdayContacts) {
   });
 }
 
+function removeContacts() {
+  var contacts = document.querySelectorAll('.bday_list li');
+
+  for (var i = 0; i < contacts.length; i++) {
+    contacts[i].parentElement.removeChild(contacts[i]);
+  }
+}
+
 var shortMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 function highlightCurrentDate() {
@@ -47,10 +55,10 @@ function highlightCurrentDate() {
   bday_list.classList.add('current-month');
   var header = document.getElementById('head_m' + today.getMonth());
   header.classList.add('current-month');
-  
+
   /*Current Day*/
   var days = bday_list.getElementsByClassName('day');
-  
+
   var i;
   for (i = 0; i < days.length; i++) {
     /*check the day*/
@@ -60,9 +68,25 @@ function highlightCurrentDate() {
   }
 }
 
+function removeHighlight() {
+  var current_months = document.querySelectorAll('.current-month');
+
+  for (var i = 0; i < current_months.length; i++) {
+    current_months[i].classList.remove('current-month');
+  }
+}
+
+function headerClickHandler(evt) {
+  removeContacts();
+  removeHighlight();
+  fetchContacts();
+
+  evt.preventDefault();
+}
+
 function contactClickHandler(evt) {
   var target = evt.target;
-  
+
   // get the contact ID
   var cid;
   if (target && target.dataset && target.dataset.cid) {
@@ -86,21 +110,14 @@ function openContact(cid) {
     }
   }
   });
-  
+
   activity.onerror = function() {
     /* Coming back from the Contact view */
     console.log('...back from Contact view');
   };
 }
 
-
-function start() {
-  /*Main function*/
-  
-  // attach click handler
-  var bday_lists = document.getElementById('bday_lists');
-  bday_lists.onclick = contactClickHandler;
-  
+function fetchContacts () {
   // Browse the contacts
   var allContacts = navigator.mozContacts.getAll();
   console.log(allContacts)
@@ -108,7 +125,7 @@ function start() {
 
   allContacts.onsuccess = function(event) {
     var cursor = event.target;
-    
+
     if (cursor.result) {
       var contact = cursor.result;
       if (contact.bday) {
@@ -123,30 +140,44 @@ function start() {
     } else {
       console.log("Browsing contacts done");
       processContacts(bdayContacts);
-        
+
       highlightCurrentDate();
     }
   };
-  
+
   allContacts.onerror = function(event) {
     alert('Could not browse contacts. Loading fake contacts')
     bdayContacts = [
-        {
-          'name': 'Alphonse',
-          'bday': new Date(1950, 1, 3)
-        },
-        {
-          'name': 'Jules',
-          'bday': new Date(1980, 1, 3)
-        },
-        {
-          'name': 'Sophie',
-          'bday': new Date(1990, 1, 13)
-        }
-      ];
-  processContacts(bdayContacts);
+      {
+        'name': 'Alphonse',
+        'bday': new Date(1950, 1, 3)
+      },
+      {
+        'name': 'Jules',
+        'bday': new Date(1980, 1, 3)
+      },
+      {
+        'name': 'Sophie',
+        'bday': new Date(1990, 1, 13)
+      }
+    ];
+    processContacts(bdayContacts);
   };
-  
+}
+
+function start() {
+  /*Main function*/
+
+  // attach click handler
+  var header = document.querySelector('section[role="region"]');
+  header.ondblclick = headerClickHandler;
+
+  // attach click handler
+  var bday_lists = document.getElementById('bday_lists');
+  bday_lists.onclick = contactClickHandler;
+
+  // update the contact list
+  fetchContacts();
 }
 
 
