@@ -37,3 +37,8 @@ These specifities are:
 * Web Activity API for opening a contact
 * Gaia style, for header and lists
 
+Contributions
+-------------
+
+* Italian and Esperanto translations by Michael Moroni @Airon90
+
