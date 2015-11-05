@@ -7,6 +7,7 @@
 
     // The default time of the alarm
     var alarmTime = [0, 0];
+    var quietMode = false;
 
 
     /* Helpers */
@@ -149,6 +150,19 @@
     }
 
     /**
+     * Remove all the alarms
+     */
+    function removeAllAlarms() {
+        var alarmRequest = navigator.mozAlarms.getAll();
+
+        alarmRequest.onsuccess = function () {
+            this.result.forEach(function (alarm) {
+                removeAlarm(alarm.data, alarm.id).then(disableAlarmButton);
+            });
+        };
+    }
+
+    /**
      * Add or remove an alarm for a contact
      * @param  {String} cid
      * @param  {Number} aid
@@ -216,6 +230,7 @@
             if (
                 contact.bday.getMonth() === today.getMonth()
                 && contact.bday.getDate() === today.getDate()
+                && !quietMode
             ) {
                 notifyContactBirthday(contact);
             }
@@ -293,56 +308,64 @@
 
     /**
      * Fetch the contacts and filter them
+     * @return {Promise}
      */
     function fetchContacts() {
-        var allContacts = navigator.mozContacts.getAll();
-        var bdayContacts = [];
+        var contactPromise = new Promise(function (resolve, reject) {
+            var allContacts = navigator.mozContacts.getAll();
+            var bdayContacts = [];
 
-        allContacts.onsuccess = function (event) {
-            var cursor = event.target;
+            allContacts.onsuccess = function (event) {
+                var cursor = event.target;
 
-            if (cursor.result) {
-                var contact = cursor.result;
+                if (cursor.result) {
+                    var contact = cursor.result;
 
-                if (contact.bday) {
-                    bdayContacts.push({
-                        name: contact.name[0],
-                        bday: contact.bday,
-                        id: contact.id
-                    });
+                    if (contact.bday) {
+                        bdayContacts.push({
+                            name: contact.name[0],
+                            bday: contact.bday,
+                            id: contact.id
+                        });
+                    }
+
+                    cursor.continue();
+                } else {
+                    processContacts(bdayContacts);
+                    highlightCurrentDate();
+
+                    resolve();
                 }
+            };
 
-                cursor.continue();
-            } else {
-                processContacts(bdayContacts);
-                highlightCurrentDate();
-            }
-        };
+            allContacts.onerror = function () {
+                window.alert('Contacts permission is required for reading birthdays');
 
-        allContacts.onerror = function () {
-            window.alert('Contacts permission is required for reading birthdays');
-        };
+                reject();
+            };
+        });
+
+        return contactPromise;
     }
 
     /**
      * Reload the app data
      */
-    function reloadAll() {
+    function reloadAll(needSilence) {
+        if (!!needSilence) {
+            quietMode = true;
+        }
+
         removeHighlight();
         removeContacts();
-        fetchContacts();
+        fetchContacts().then(function () {
+            if (!!needSilence) {
+                quietMode = false;
+            }
+        });
     }
 
     /* Event handlers */
-
-    /**
-     * Event handler for a click on the reload button
-     * @param  {Event} evt
-     */
-    function reloadClickHandler(evt) {
-        reloadAll();
-        evt.preventDefault();
-    }
 
     /**
      * Event handler for a click on the contact list
@@ -362,9 +385,8 @@
 
     /**
      * Event handler for a click on the option button
-     * @param  {Event} evt
      */
-    function optionsClickHandler(evt) {
+    function optionsClickHandler() {
         var options = {
             header: {
                 l10nId: 'app_title'
@@ -373,11 +395,19 @@
                 l10nId: 'btn_reload',
                 method: reloadAll
             }, {
+                l10nId: 'btn_alarms_add',
+                method: function () {
+                    reloadAll(true);
+                }
+            }, {
+                l10nId: 'btn_alarms_remove',
+                method: removeAllAlarms
+            }, {
                 l10nId: 'btn_cancel'
             }]
         };
 
-        new OptionMenu(options).show();
+        var menu = new OptionMenu(options).show();
     }
 
     /**
@@ -386,9 +416,6 @@
     function start() {
         // listen to the click event on the options button
         document.getElementById('button-options').addEventListener('click', optionsClickHandler);
-
-        // listen to the click event on the reload button
-        // document.getElementById('button-reload').addEventListener('click', reloadClickHandler);
 
         // listen to the click event on the contact list
         document.getElementById('bday_lists').addEventListener('click', contactClickHandler);
