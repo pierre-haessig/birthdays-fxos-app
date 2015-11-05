@@ -69,7 +69,16 @@
      * @param {Object} contact
      */
     function addAlarm(contact) {
+        var today = new Date();
         var alarmDate = new Date();
+
+        if (
+            contact.bday.getMonth() <= today.getMonth()
+            && contact.bday.getDate() <= today.getDate()
+        ) {
+            alarmDate.setFullYear(alarmDate.getFullYear() + 1);
+        }
+
         alarmDate.setMonth(contact.bday.getMonth());
         alarmDate.setDate(contact.bday.getDate());
         alarmDate.setHours(alarmTime[0]);
@@ -129,7 +138,8 @@
 
             // Notifications
             if (
-                contact.bday.getMonth() === today.getMonth() && contact.bday.getDate() === today.getDate()
+                contact.bday.getMonth() === today.getMonth()
+                && contact.bday.getDate() === today.getDate()
             ) {
                 notifyContactBirthday(contact);
             }
