@@ -46,6 +46,32 @@
     }
 
     /**
+     * Fetch contact according to its ID
+     * @param  {String} cid
+     * @return {Promise}
+     */
+    function getContactFromId(cid) {
+        var contactPromise = new Promise(function (resolve, reject) {
+            var contactRequest = window.navigator.mozContacts.find({
+                filterBy: ['id'],
+                filterValue: cid,
+                filterOp: 'equals',
+                filterLimit: 1
+            });
+
+            contactRequest.onsuccess = function () {
+                resolve(this.result[0]);
+            };
+
+            contactRequest.onerror = function () {
+                reject(cid);
+            };
+        });
+
+        return contactPromise;
+    }
+
+    /**
      * Open the contact according to its ID
      * @param  {String} cid
      */
@@ -59,15 +85,12 @@
                 }
             }
         });
-
-        activity.onerror = function () {
-            window.alert('An error occured when opening the contact.');
-        };
     }
 
     /**
      * Add an alarm for a contact birthday
      * @param {Object} contact
+     * @return {Promise}
      */
     function addAlarm(contact) {
         var alarmDate = new Date();
@@ -86,14 +109,58 @@
         alarmDate.setSeconds(0);
         alarmDate.setMilliseconds(0);
 
-        var alarmRequest = navigator.mozAlarms.add(alarmDate, "ignoreTimezone", contact);
+        var alarmPromise = new Promise(function (resolve, reject) {
+            var alarmRequest = navigator.mozAlarms.add(alarmDate, 'ignoreTimezone', contact);
 
-        alarmRequest.onsuccess = function () {
-            var day = document.querySelector('.bday_list li[data-cid="' + contact.id + '"]');
-            if (!!day) {
-                day.dataset.aid = this.result;
+            alarmRequest.onsuccess = function () {
+                resolve({
+                    aid: this.result,
+                    cid: contact.id
+                });
+            };
+
+            alarmRequest.onerror = function () {
+                reject({
+                    aid: this.result,
+                    cid: contact.id
+                });
+            };
+        });
+
+        return alarmPromise;
+    }
+
+    /**
+     * Remove the alarm of a contact birthday
+     * @param  {Object} contact
+     * @param  {Number} aid
+     * @return {Promise}
+     */
+    function removeAlarm(contact, aid) {
+        var alarmPromise = new Promise(function (resolve) {
+            navigator.mozAlarms.remove(aid);
+
+            resolve({
+                cid: contact.id
+            });
+        });
+
+        return alarmPromise;
+    }
+
+    /**
+     * Add or remove an alarm for a contact
+     * @param  {String} cid
+     * @param  {Number} aid
+     */
+    function toggleAlarm(cid, aid) {
+        getContactFromId(cid).then(function (contact) {
+            if (!!aid) {
+                removeAlarm(contact, aid).then(disableAlarmButton);
+            } else {
+                addAlarm(contact).then(enableAlarmButton);
             }
-        };
+        });
     }
 
     /**
@@ -125,15 +192,24 @@
         bdayContacts.forEach(function (contact) {
             // Display
             var bday_list = document.getElementById('bday_list_m' + contact.bday.getMonth());
+
             var li = document.createElement('li');
             li.dataset.cid = contact.id;
             li.innerHTML = (
-                "<p>" +
-                    "<strong class='day'>" + contact.bday.getDate() + "</strong>" + " " +
-                    "<span class='name'>" + contact.name + "</span>" + " " +
-                    "<em class='age'>(" + bdayAge(contact) + ")</em>" +
-                "</p>"
+                '<aside class="pack-end">' +
+                    '<button class="btn-alarm inactive" data-aid=""' +
+                        'title="' + navigator.mozL10n.get('btn_alarm_toggle') + '"' +
+                    '>' +
+                        navigator.mozL10n.get('alarm_off') +
+                    '</button>' +
+                '</aside>' +
+                '<p>' +
+                    '<strong class="day">' + contact.bday.getDate() + '</strong>' + ' ' +
+                    '<span class="name">' + contact.name + '</span>' + ' ' +
+                    '<em class="age">(' + bdayAge(contact) + ')</em>' +
+                '</p>'
             );
+
             bday_list.appendChild(li);
 
             // Notifications
@@ -145,7 +221,7 @@
             }
 
             // Alarms
-            addAlarm(contact);
+            addAlarm(contact).then(enableAlarmButton);
         });
     }
 
@@ -163,6 +239,22 @@
             // Remove the contact from the document
             contacts[i].parentElement.removeChild(contacts[i]);
         }
+    }
+
+    function enableAlarmButton(value) {
+        var btn = document.querySelector('li[data-cid="' + value.cid + '"] button.btn-alarm');
+        btn.classList.remove('inactive');
+        btn.dataset.aid = value.aid;
+        btn.dataset.cid = value.cid;
+        btn.textContent = navigator.mozL10n.get('alarm_on');
+    }
+
+    function disableAlarmButton(value) {
+        var btn = document.querySelector('li[data-cid="' + value.cid + '"] button.btn-alarm');
+        btn.classList.add('inactive');
+        btn.dataset.aid = '';
+        btn.dataset.cid = value.cid;
+        btn.textContent = navigator.mozL10n.get('alarm_off');
     }
 
     /**
@@ -201,7 +293,6 @@
 
     /**
      * Fetch the contacts and filter them
-     * @return {[type]} [description]
      */
     function fetchContacts() {
         var allContacts = navigator.mozContacts.getAll();
@@ -260,14 +351,13 @@
     function contactClickHandler(evt) {
         var target = evt.target;
 
-        // get the contact ID
-        var cid;
-        if (target && target.dataset && target.dataset.cid) {
-            cid = target.dataset.cid;
-            openContact(cid);
+        if (!!target && !!target.dataset && (!!target.dataset.aid || target.dataset.aid === '')) {
+            // If there is an alaram ID, even empty, toggle the alarm
+            toggleAlarm(target.dataset.cid, target.dataset.aid);
+        } else if (!!target && !!target.dataset && !!target.dataset.cid) {
+            // If there is a contact ID, open it
+            openContact(target.dataset.cid);
         }
-
-        evt.preventDefault();
     }
 
     /**
@@ -298,7 +388,7 @@
     /* Activities */
 
     if (navigator.mozSetMessageHandler) {
-        navigator.mozSetMessageHandler("alarm", function (alarm) {
+        navigator.mozSetMessageHandler('alarm', function (alarm) {
             if (alarm.data.id) {
                 notifyContactBirthday(alarm.data);
             }
