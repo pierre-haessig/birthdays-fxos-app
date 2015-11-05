@@ -1,4 +1,4 @@
-/*global window, console, document, navigator, MozActivity, Notification*/
+/*global window, document, navigator, MozActivity, Notification*/
 
 (function () {
     'use strict';
@@ -7,6 +7,7 @@
 
     // The default time of the alarm
     var alarmTime = [0, 0];
+
 
     /* Helpers */
 
@@ -60,7 +61,7 @@
         });
 
         activity.onerror = function () {
-            console.log('Error while fetching the contact list.');
+            window.alert('An error occured when opening the contact.');
         };
     }
 
@@ -69,12 +70,11 @@
      * @param {Object} contact
      */
     function addAlarm(contact) {
-        var today = new Date();
         var alarmDate = new Date();
 
         if (
-            contact.bday.getMonth() <= today.getMonth()
-            && contact.bday.getDate() <= today.getDate()
+            contact.bday.getMonth() <= alarmDate.getMonth()
+            && contact.bday.getDate() <= alarmDate.getDate()
         ) {
             alarmDate.setFullYear(alarmDate.getFullYear() + 1);
         }
@@ -129,9 +129,9 @@
             li.dataset.cid = contact.id;
             li.innerHTML = (
                 "<p>" +
-                "<strong class='day'>" + contact.bday.getDate() + "</strong>" + " " +
-                "<span class='name'>" + contact.name + "</span>" + " " +
-                "<em class='age'>(" + bdayAge(contact) + ")</em>" +
+                    "<strong class='day'>" + contact.bday.getDate() + "</strong>" + " " +
+                    "<span class='name'>" + contact.name + "</span>" + " " +
+                    "<em class='age'>(" + bdayAge(contact) + ")</em>" +
                 "</p>"
             );
             bday_list.appendChild(li);
@@ -229,19 +229,7 @@
         };
 
         allContacts.onerror = function () {
-            console.log('Could not browse contacts. Loading fake contacts');
-            bdayContacts = [{
-                name: 'Alphonse',
-                bday: new Date(1950, 1, 3)
-            }, {
-                name: 'Jules',
-                bday: new Date(1980, 1, 3)
-            }, {
-                name: 'Sophie',
-                bday: new Date(1990, 1, 13)
-            }];
-
-            processContacts(bdayContacts);
+            window.alert('Contacts permission is required for reading birthdays');
         };
     }
 
@@ -276,7 +264,6 @@
         var cid;
         if (target && target.dataset && target.dataset.cid) {
             cid = target.dataset.cid;
-            console.log(cid);
             openContact(cid);
         }
 
@@ -297,6 +284,7 @@
         fetchContacts();
     }
 
+
     /* Event listeners */
 
     // Launch the code once the document has been loaded and parsed
@@ -305,6 +293,7 @@
         // So we'll tell it to let us know once it's ready.
         navigator.mozL10n.once(start);
     });
+
 
     /* Activities */
 
