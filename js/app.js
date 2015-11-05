@@ -1,4 +1,4 @@
-/*global window, document, navigator, MozActivity, Notification*/
+/*global window, document, navigator, MozActivity, Notification, OptionMenu*/
 
 (function () {
     'use strict';
@@ -361,11 +361,34 @@
     }
 
     /**
+     * Event handler for a click on the option button
+     * @param  {Event} evt
+     */
+    function optionsClickHandler(evt) {
+        var options = {
+            header: {
+                l10nId: 'app_title'
+            },
+            items: [{
+                l10nId: 'btn_reload',
+                method: reloadAll
+            }, {
+                l10nId: 'btn_cancel'
+            }]
+        };
+
+        new OptionMenu(options).show();
+    }
+
+    /**
      * Main function: listen to events and reload the contact list
      */
     function start() {
+        // listen to the click event on the options button
+        document.getElementById('button-options').addEventListener('click', optionsClickHandler);
+
         // listen to the click event on the reload button
-        document.getElementById('button-reload').addEventListener('click', reloadClickHandler);
+        // document.getElementById('button-reload').addEventListener('click', reloadClickHandler);
 
         // listen to the click event on the contact list
         document.getElementById('bday_lists').addEventListener('click', contactClickHandler);
