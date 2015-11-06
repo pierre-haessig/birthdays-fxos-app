@@ -97,8 +97,11 @@
         var alarmDate = new Date();
 
         if (
-            contact.bday.getMonth() <= alarmDate.getMonth()
-            && contact.bday.getDate() <= alarmDate.getDate()
+            contact.bday.getMonth() < alarmDate.getMonth()
+            || (
+                contact.bday.getMonth() === alarmDate.getMonth()
+                && contact.bday.getDate() <= alarmDate.getDate()
+            )
         ) {
             alarmDate.setFullYear(alarmDate.getFullYear() + 1);
         }
