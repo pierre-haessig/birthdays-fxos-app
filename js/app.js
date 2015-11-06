@@ -441,10 +441,16 @@
     /* Activities */
 
     if (navigator.mozSetMessageHandler) {
+        // Listen for alarms
         navigator.mozSetMessageHandler('alarm', function (alarm) {
+            // If the alarm contains a contact ID, notify it
             if (alarm.data.id) {
                 notifyContactBirthday(alarm.data);
             }
+
+            // Remove the alarm and add a new one for the next year
+            removeAlarm(alarm.data, alarm.id).then(disableAlarmButton);
+            addAlarm(alarm.data).then(enableAlarmButton);
         });
     }
 }());
