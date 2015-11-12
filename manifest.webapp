@@ -19,8 +19,12 @@
 			"description": "Required for reading birthdays",
 			"access": "readonly"
 		},
-		"desktop-notification": {},
-		"audio-channel-notification": {},
+		"desktop-notification": {
+			"description": "Required to notify birthdays"
+		},
+		"audio-channel-notification": {
+			"description": "Required to notify birthdays"
+		},
 		"alarms": {
 			"description": "Required to schedule alarms"
 		}
