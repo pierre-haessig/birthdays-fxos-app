@@ -215,6 +215,7 @@
             li.innerHTML = (
                 '<aside class="pack-end">' +
                     '<button class="btn-alarm inactive" data-aid=""' +
+                        'data-cid="' + contact.id + '"' +
                         'title="' + navigator.mozL10n.get('btn_alarm_toggle') + '"' +
                     '>' +
                         navigator.mozL10n.get('alarm_off') +
