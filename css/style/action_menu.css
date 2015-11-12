@@ -2,15 +2,6 @@
  * Action menu
  * ---------------------------------- */
 
-html[dir="ltr"] [role="dialog"][data-type="action"] [dir],
-html[dir="ltr"] [role="dialog"][data-type="action"] button {
-  text-align: left;
-}
-html[dir="rtl"] [role="dialog"][data-type="action"] [dir],
-html[dir="rtl"] [role="dialog"][data-type="action"] button {
-  text-align: right;
-}
-
 /* Main dialog setup */
 [role="dialog"][data-type="action"] {
   background: #2d2d2d;
@@ -36,11 +27,11 @@ html[dir="rtl"] [role="dialog"][data-type="action"] button {
   vertical-align: top;
   width: 0.1rem;
   height: 100%;
-  margin-inline-start: -0.1rem;
+  margin-left: -0.1rem;
 }
 
 [role="dialog"][data-type="action"] > header {
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   font-size: 1.6rem;
   position: absolute;
   top: 0;
@@ -58,14 +49,11 @@ html[dir="rtl"] [role="dialog"][data-type="action"] button {
   padding: 0 3rem;
   border-bottom: 0.1rem solid #616262;
 }
-[role="dialog"][data-type="action"] > header * {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 [role="dialog"][data-type="action"] > header h1 {
   font-size: 1.6rem;
   line-height: 4.9rem;
+  text-align: left;
   color: #fff;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -79,17 +67,16 @@ html[dir="rtl"] [role="dialog"][data-type="action"] button {
 /* Generic set of actions in toolbar */
 [role="dialog"][data-type="action"] > header menu[type="toolbar"] {
   height: 100%;
-  margin: 0 -3rem;
-  margin-inline-start: 1rem;
+  float: right;
+  margin: 0 -3rem 0 1rem;
   padding: 0;
 }
-html[dir="ltr"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] { float: right; }
-html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] { float: left; }
 
 [role="dialog"][data-type="action"] > header menu[type="toolbar"] a,
 [role="dialog"][data-type="action"] > header menu[type="toolbar"] button {
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   position: relative;
+  float: left;
   width: auto;
   min-width: 5rem;
   height: 4.9rem;
@@ -101,14 +88,6 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"
   text-align: center;
   text-shadow: none;
   z-index: 5;
-}
-html[dir="ltr"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] a,
-html[dir="ltr"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] button {
-  float: left;
-}
-html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] a,
-html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] button {
-  float: right;
 }
 
 [role="dialog"][data-type="action"] > header a,
@@ -162,31 +141,20 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"
   background-image: url(action_menu/images/icons/close.png);
 }
 
-html[dir="ltr"] [role="dialog"][data-type="action"] > header .icon.icon-back {
-  background-image: url(action_menu/images/icons/left.png);
-}
-html[dir="rtl"] [role="dialog"][data-type="action"] > header .icon.icon-back {
-  background-image: url(action_menu/images/icons/right.png);
+[role="dialog"][data-type="action"] > header .icon.icon-back {
+  background-image: url(action_menu/images/icons/back.png);
 }
 
 /* Navigation links (back, cancel, etc) */
 [role="dialog"][data-type="action"] > header > button,
 [role="dialog"][data-type="action"] > header > a {
+  float: left;
   width: 5rem;
   height: 4.9rem;
   background: none;
   overflow: visible;
-  margin: 0 -1rem;
-  margin-inline-start: -3rem;
+  margin: 0 -1rem 0 -3rem;
   position: relative;
-}
-html[dir="ltr"] [role="dialog"][data-type="action"] > header > button,
-html[dir="ltr"] [role="dialog"][data-type="action"] > header > a {
-  float: left;
-}
-html[dir="rtl"] [role="dialog"][data-type="action"] > header > button,
-html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
-  float: right;
 }
 
 [role="dialog"][data-type="action"] > header > button::-moz-focus-inner {
@@ -209,7 +177,7 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
 [role="dialog"][data-type="action"] > header > a .icon:after {
   content: "";
   position: absolute;
-  offset-inline-start: 0;
+  left: 0;
   top: 0;
   z-index: -1;
   width: 3rem;
@@ -248,7 +216,7 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
 [role="dialog"][data-type="action"] > menu > button {
   width: calc(100% - 3rem);
   height: 4rem;
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   vertical-align: middle;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -258,8 +226,10 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
   outline: none;
   font-size: 1.6rem;
   text-shadow: none;
+  text-align: start;
   padding: 0 1.2rem;
-  margin: 0 1.5rem 1rem;
+  -moz-padding-end: 0.2rem;
+  margin: 0 1.5rem 1rem 1.5rem;
   background: rgba(87, 87, 87, 0.8);
   border: none;
   border-radius: 0;
@@ -269,31 +239,27 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
   font-style: italic;
 }
 
-[role="dialog"][data-type="action"] > menu > .last-button-container {
-  position: fixed;
-  width: 100%;
-  background-color: #4d4d4d;
-  height: 7rem;
-  offset-inline-start: 0;
-  bottom: 0;
-}
-
-[role="dialog"][data-type="action"] > menu > .last-button-container button {
-  width: calc(100% - 3rem);
+[role="dialog"][data-type="action"] > menu > button:last-child {
   position: fixed;
   bottom: 0;
-  margin: 0 1.5rem 1.5rem;
-  offset-inline-start: 0;
+  left: 0;
   color: #333;
   background: #d8d8d8;
   text-align: center;
   border: none;
+  margin-bottom: 1.5rem;
   border-radius: 2rem;
-  line-height: 4rem;
-  font-size: 1.6rem;
-  height: 4rem;
-  font-family: sans-serif;
-  font-style: italic;
+}
+
+[role="dialog"][data-type="action"] > menu > button:last-child:before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  background-color: #4d4d4d;
+  height: 7rem;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 [role="dialog"][data-type="action"] > menu > button:nth-last-child(2) {
@@ -301,7 +267,7 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
 }
 
 /* Press state */
-[role="dialog"][data-type="action"] > menu button:active {
+[role="dialog"][data-type="action"] > menu > button:active {
   background: #00aacc;
   color: #fff;
 }
@@ -314,8 +280,70 @@ html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
   pointer-events: none;
 }
 
-[role="dialog"][data-type="action"] > menu > .last-button-container button[disabled] {
+[role="dialog"][data-type="action"] > menu > button[disabled]:last-child {
   background-color: #e7e7e7;
   color: #a6a6a6;
   opacity: 1;
 }
+
+/*
+ * Right to Left view
+ */
+
+html[dir="rtl"] [role="dialog"][data-type="action"]:before {
+  margin-left: auto;
+  margin-right: -0.1rem;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header h1 {
+  text-align: right;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] {
+  float: left;
+  margin-left: -3rem;
+  margin-right: 1rem;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] a,
+html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] button {
+  float: right;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] a:last-child,
+html[dir="rtl"] [role="dialog"][data-type="action"] > header menu[type="toolbar"] button:last-child {
+  background-position: right center;
+  margin-left: auto;
+  margin-right: -0.1rem;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > button,
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > a {
+  float: right;
+  margin-left: -1rem;
+  margin-right: -3rem;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > button:after,
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > a:after {
+  left: auto;
+  right: 0;
+  background-position: 0 top;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > button .icon:after,
+html[dir="rtl"] [role="dialog"][data-type="action"] > header > a .icon:after {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > menu > button:last-child {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] [role="dialog"][data-type="action"] > menu > button:last-child:before {
+  left: auto;
+  right: 0;
+}
+
