@@ -26,13 +26,13 @@ html, body {
   height: 1.8em;
   line-height: 1.8em;
   border-radius: 0.5em;
-  
+
   background-color: #ec6900; /*orange*/
   color: white;
-  
+
   text-align: center;
   vertical-align: middle;
-  
+
   margin-right: 0.3em;
 }
 
@@ -48,4 +48,20 @@ header.current-month {
 /* Current day */
 ul.current-month .current-day {
   background-color: #f00479; /*pink*/
+}
+
+/* ICONS */
+.btn-alarm {
+    border: 0;
+    background: url(../img/bell-active-128.png) no-repeat center;
+    background-size: 100%;
+    font-size: 0;
+    line-height: 0;
+    min-width: 3rem;
+    min-height: 3rem;
+    margin-top: 1.5rem;
+}
+
+.btn-alarm.inactive {
+    background-image: url(../img/bell-128.png);
 }

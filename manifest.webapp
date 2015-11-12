@@ -18,6 +18,11 @@
 		"contacts": {
 			"description": "Required for reading birthdays",
 			"access": "readonly"
+		},
+		"desktop-notification": {},
+		"audio-channel-notification": {},
+		"alarms": {
+			"description": "Required to schedule alarms"
 		}
 	},
 	"locales": {
@@ -45,7 +50,7 @@
 				"contacts": {
 					"description": "Nécessaire pour lire les anniversaires"
 				}
-    		}
+				}
 		},
 		"it": {
 			"name": "Compleanni",
@@ -54,8 +59,8 @@
 				"contacts": {
 					"description": "Necessario per leggere i compleanni"
 				}
-    		}
+				}
 		}
 	},
-	"default_locale": "en"
+	"default_locale": "en-US"
 }
