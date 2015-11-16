@@ -194,7 +194,7 @@ section[role="region"] > header:first-child .icon-down {
 }
 
 section[role="region"] > header:first-child .icon-options {
-  background-image: url(headers/images/icons/options.png);
+  background-image: url(headers/images/icons/options@2x.png);
 }
 
 /* ----------------------------------
