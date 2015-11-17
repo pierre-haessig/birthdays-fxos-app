@@ -41,3 +41,4 @@ Contributions
 
 * Italian and Esperanto translations by Michael Moroni @Airon90
 * Birthday notification using alarms by Aurélien Manca @noreiller
+* German translation improvement by Michael Müller (via email)

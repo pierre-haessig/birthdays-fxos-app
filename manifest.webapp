@@ -1,5 +1,5 @@
 {
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"name": "Birthdays",
 	"description": "Displays the birthday of the contacts",
 	"launch_path": "/index.html",
